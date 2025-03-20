@@ -31,48 +31,48 @@
                       <th scope="col">#</th>
                       <th scope="col">Order#</th>
                       <th scope="col">Total Price</th>
-                      <th scope="col">User ID</th>
-                      <th scope="col">Shipping Address</th>
-                      <th scope="col">Phone</th>
-                      <th scope="col">Coupon ID</th>
                       <th scope="col">Status</th>
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($orders as $order)
-                      <tr>
-                        <th scope="row">{{$order['id']}}</th>
-                        <td>200025-{{$order['id']}}</td>
-                        <td>JOD {{$order['total_price']}}</td>
-                        <td>{{$order['user_id']}}</td>
-                        <td>{{$order['shipping_address']}}</td>
-                        <td>{{$order['phone']}}</td>
-                        <td>{{$order['coupon']}}</td>
-                        <td>{{$order['status']}}</td>
-                        <td>
-                          <div class="dropdown">
-                            <button class="drop-border" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              <li><a class="dropdown-item" href="{{ route('orders.show', $order['id']) }}">View</a></li>
-                              <li><a class="dropdown-item edit-order-link" href="#" data-id="{{ $order->id }}">
-                                Edit
-                              </a>
-                              </li>
-                              <li>
-                                <form action="{{ route('orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this order?')">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="dropdown-item text-danger">Delete</button>
-                              </form>
-                              </li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      @endforeach
+                    @if (count($orders))
+    
+                      @foreach ($orders as $order)
+                        <tr>
+                          <th scope="row">{{$order['id']}}</th>
+                          <td>200025-{{$order['id']}}</td>
+                          <td>JOD {{$order['total_price']}}</td>
+                          <td>{{$order['status']}}</td>
+                          <td>
+                            <div class="dropdown">
+                              <button class="drop-border" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                              </button>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{ route('orders.show', $order['id']) }}">View</a></li>
+                                <li><a class="dropdown-item edit-order-link" href="#" data-id="{{ $order->id }}">
+                                  Edit
+                                </a>
+                                </li>
+                                <li>
+                                  <form action="{{ route('orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this order?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                </form>
+                                </li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        @endforeach
+
+                    @else
+                    <tr>
+                      <td colspan="5" class="text-center py-2 ">No Orders Found</td>
+                    </tr>
+                    @endif
                     </tbody>
                   </table>
                 </div>

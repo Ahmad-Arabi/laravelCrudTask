@@ -1,6 +1,7 @@
 <div class="modal fade" id="editOrderModal" tabindex="-1" aria-labelledby="editOrderLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            @if(isset($order))
             <form id="editOrderForm" action="{{ route('orders.update', $order->id) }}" method="POST">
                 @csrf
                 @method('PUT')
@@ -38,6 +39,9 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
+            @else
+                <p>No orders available to edit.</p>
+            @endif
         </div>
     </div>
 </div>
