@@ -56,7 +56,7 @@
                               <i class="bi bi-three-dots-vertical"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                              {{-- <li><a class="dropdown-item" href="#">View</a></li> --}}
+                              <li><a class="dropdown-item" href="{{ route('orders.show', $order['id']) }}">View</a></li>
                               <li><a class="dropdown-item edit-order-link" href="#" data-id="{{ $order->id }}">
                                 Edit
                               </a>

@@ -20,6 +20,11 @@ class OrderController extends Controller
 
     }
 
+    public function show($id) {
+        $order = Order::findOrFail($id);
+        return view('orders.show', compact('order'));
+    }
+
     public function store(Request $request) {
 
         $validatedData = $request->validate([
